@@ -115,6 +115,10 @@ body {
   align-self: center;
 }
 
+.card__text_secondary {
+  grid-row: 5/5;
+  align-self: center;
+}
 
 .card-err {
   background: radial-gradient(#ff7474, #ff4e4e);

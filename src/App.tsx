@@ -55,11 +55,13 @@ function App() {
           request.get(server.url, {method: 'GET'}, (error: any, response: any, body: any) => {
             if(response) {
               if(parseInt(response.statusCode) !== 200) {
+                server.status_code = parseInt(response.statusCode);
                 console.log(error)
                 console.log("Server is down");
                 server.is_up = false;
                 server.color_class = "card-err";
               }else{
+                server.status_code = parseInt(response.statusCode);
                 console.log("Server is up");
                 server.is_up = true;
                 server.color_class = "card-ok";
@@ -107,7 +109,10 @@ function App() {
               <h2 className='card__title'>{server.display_url}</h2>
               {
                 selectedServer && selectedServer === server?
-                <p className='card__text'>{server.is_up?server.last_update:null}</p>
+                <>
+                  <p className='card__text'>{server.is_up?server.last_update:null}</p>
+                  <p className='card__text_secondary'>{server.is_up?`Last status code:${server.status_code}`:null}</p>
+                </>
                 :null
               }
             </div>
